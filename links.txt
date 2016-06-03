@@ -1,4 +1,0 @@
-http://www.tomas-dvorak.cz/posts/jpa-multitenancy/
-http://codecrafters.blogspot.in/2013/03/multi-tenant-cloud-applications-with.html
-http://stackoverflow.com/questions/3731016/multiple-entity-manager-issue-in-spring-when-using-more-than-one-datasource/6796136#6796136
-http://stackoverflow.com/questions/9717928/multitenancy-with-spring-jpa

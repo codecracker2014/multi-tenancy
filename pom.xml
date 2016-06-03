@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.nuc</groupId>
-	<artifactId>nucleus-multitenency</artifactId>
+	<groupId>com.codecracker</groupId>
+	<artifactId>paccounting</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>nucleus-multitenency Maven Webapp</name>
+	<name>Paccounting Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 
@@ -51,7 +51,8 @@
 			<artifactId>spring-aop</artifactId>
 			<version>4.0.2.RELEASE</version>
 		</dependency>
-
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>security</artifactId> 
+			<version>4.0.2.RELEASE</version> </dependency> -->
 		<!--End -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -99,10 +100,31 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>3.0-alpha-1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.4.1.1</version>
+		</dependency>
 
 	</dependencies>
 	<build>
-		<finalName>nucleus-multitenency</finalName>
+		<finalName>paccounting</finalName>
+		<plugins>
+			<plugin>
+				<groupId>com.google.appengine</groupId>
+				<artifactId>appengine-maven-plugin</artifactId>
+				<version>1.9.37</version>
+			</plugin>
+		</plugins>
 	</build>
 </project>
