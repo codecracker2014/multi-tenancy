@@ -27,8 +27,13 @@
 			<value>classpath:app-config/database.properties</value>
 		</property>
 	</bean>
-
-	<bean id="dataSource"
+ <bean class="com.paccounting.security.AuthFilter" id="authFilter"></bean>
+ 
+     <!-- a HTTP request-scoped bean exposed as a proxy -->
+<!--     <bean class="com.technowobble.web.Headers" id="headers" scope="request">
+        <aop:scoped-proxy></aop:scoped-proxy>
+   </bean>
+ -->	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
 		<property name="url" value="${jdbc.url}" />

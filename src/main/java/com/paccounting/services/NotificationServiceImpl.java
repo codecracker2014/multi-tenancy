@@ -59,9 +59,9 @@ public class NotificationServiceImpl implements NotificationService{
 					mapper.setNotification(notification);
 					Receiver receiver=new Receiver(borrower);
 					mapper.setReceiver(receiver);
-					mapper.setStatus(Notification.Status.READY.ordinal());
+					mapper.setStatus(notification.getStatus());
 					System.out.println("ID:"+borrower.getMob());
-					if(flag)
+					if(notification.getStatus()==Notification.Status.MODIFIED.ordinal()||notification.getStatus()==Notification.Status.DELETED.ordinal())
 					{
 						NotificationReceiverMapper m=entityDao.getMapperByNotificationReceiver(notification, receiver);
 						mapper.setId(m.getId());
@@ -69,7 +69,7 @@ public class NotificationServiceImpl implements NotificationService{
 						entityDao.updateEntity(mapper);
 					}
 					else
-					entityDao.saveEntity(mapper);
+						entityDao.saveEntity(mapper);
 				}
 				
 			}
@@ -84,8 +84,8 @@ public class NotificationServiceImpl implements NotificationService{
 					mapper.setNotification(notification);
 					Receiver receiver=new Receiver(payer);
 					mapper.setReceiver(receiver);
-					mapper.setStatus(Notification.Status.READY.ordinal());
-					if(flag)
+					mapper.setStatus(notification.getStatus());
+					if(notification.getStatus()==Notification.Status.MODIFIED.ordinal()||notification.getStatus()==Notification.Status.DELETED.ordinal())
 					{
 						NotificationReceiverMapper m=entityDao.getMapperByNotificationReceiver(notification, receiver);
 						mapper.setId(m.getId());
@@ -114,16 +114,26 @@ public class NotificationServiceImpl implements NotificationService{
 		//List<Notification>list=receiver.getNotificationIds();
 		List<NotificationReceiverMapper> mappers=entityDao.getMapperByReceiver(receiver);
 		List<Notification>notifications=new ArrayList<Notification>();
+		List<NotificationReceiverMapper>mappers2=new ArrayList<NotificationReceiverMapper>();
 		for(NotificationReceiverMapper mapper:mappers)
 		{
-			if(mapper.getStatus()==Notification.Status.READY.ordinal())
+			if(mapper.getStatus()==Notification.Status.READY.ordinal()||mapper.getStatus()==Notification.Status.MODIFIED.ordinal()||mapper.getStatus()==Notification.Status.NEW.ordinal())
 			{
 				notifications.add(mapper.getNotification());
 				mapper.setStatus(Notification.Status.SENT.ordinal());
+				mappers2.add(mapper);
 			}
+			else if(mapper.getStatus()==Notification.Status.DELETED.ordinal())
+			{
+				notifications.add(mapper.getNotification());
+				System.out.println("deleting mapper "+mapper.getId());
+				entityDao.delete(mapper);
+			}
+
+				
 		}
 		System.out.println("saved");
-		entityDao.saveAllEntities(mappers);
+		entityDao.saveAllEntities(mappers2);
 		return formatNotification(notifications);
 	}
 	private List<InputNotification> formatNotification(List<Notification> list) {

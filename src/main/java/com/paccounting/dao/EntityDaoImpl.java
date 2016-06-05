@@ -94,5 +94,20 @@ public class EntityDaoImpl implements EntityDao {
 		
 	}
 
+
+	@Transactional
+	public boolean delete(Object object) {
+		
+		try{
+			
+			entityManager.remove(object);
+		}catch(Exception exception)
+		{
+			exception.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
 	
 }

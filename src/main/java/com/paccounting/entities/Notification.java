@@ -36,7 +36,7 @@ public class Notification {
 		private Status(int value) { this.value = value; }
 	}
 	
-	@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="sender_not_id")
 	private User sender;
 

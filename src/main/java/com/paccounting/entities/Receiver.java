@@ -48,19 +48,31 @@ public class Receiver{
 		this.mob = mob;
 	}
 
-	public Receiver(User user/*,Set<Notification> notif*/)
+	public Receiver(Borrower user/*,Set<Notification> notif*/)
 	{
 		this.setMob(user.getMob());
 		this.setStatus(false);
 		
 		//this.setNotifications(notif);
 	}
-	public Receiver(User user,boolean status)
+	public Receiver(Borrower user,boolean status)
 	{
 		this.setMob(user.getMob());
 		this.setStatus(status);
 	}
 
+	public Receiver(Payer user/*,Set<Notification> notif*/)
+	{
+		this.setMob(user.getMob());
+		this.setStatus(false);
+		
+		//this.setNotifications(notif);
+	}
+	public Receiver(Payer user,boolean status)
+	{
+		this.setMob(user.getMob());
+		this.setStatus(status);
+	}
 	public boolean isStatus() {
 		return status;
 	}

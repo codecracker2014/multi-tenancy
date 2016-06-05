@@ -18,14 +18,18 @@ import com.paccounting.entities.Payer;
 import com.paccounting.entities.Transaction;
 import com.paccounting.entities.User;
 import com.paccounting.model.InputNotification;
+import com.paccounting.model.NewUser;
 import com.paccounting.services.NotificationService;
+import com.paccounting.services.UserService;
 
 @RestController
 public class RstController {
 
 	
 	@Autowired
-	NotificationService notificationService;
+	private NotificationService notificationService;
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping(value="addEvent",method=RequestMethod.POST,consumes="application/json")
 	public HttpStatus addEvent(@RequestBody InputNotification inputNotification)
@@ -91,6 +95,20 @@ public class RstController {
 		return in;
 	}
   
+	
+	@RequestMapping(value="/register",method=RequestMethod.POST)
+	public HttpStatus register(@RequestBody NewUser newUser) {
+		System.out.println("Registering user");
+		if(userService.addUser(newUser))
+		{
+			return HttpStatus.ACCEPTED;
+		}
+		else
+		{
+			return HttpStatus.BAD_REQUEST;
+		}
+		
+	}
   
   
   

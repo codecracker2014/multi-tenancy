@@ -13,6 +13,14 @@ public class User {
 	@Id
 	private String mob;
 	private String name;
+	private String pass;
+	
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
 	public String getMob() {
 		return mob;
 	}

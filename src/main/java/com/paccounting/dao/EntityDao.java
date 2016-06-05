@@ -11,6 +11,7 @@ public interface EntityDao {
 	public boolean saveEntity( Object entity);
 	public boolean updateEntity(Object entity);
 	public boolean saveAllEntities( List<?> entities);
+	public boolean delete(Object object);
 	public <T>T getObject(Class<T> type,String id);
 	public List<Notification>getAllNotifications(Receiver receiver);
 	public List<NotificationReceiverMapper> getMapperByReceiver(Receiver receiver);
