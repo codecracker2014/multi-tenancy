@@ -1,11 +1,13 @@
 package com.paccounting.security;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.security.MessageDigest;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -14,10 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.filter.GenericFilterBean;
 
 
@@ -31,6 +29,60 @@ public class AuthFilter extends GenericFilterBean{
 			throws IOException, ServletException {
 			System.out.println("Request in filter");
 			String pass="123456";
+			
+			String authkey = "115131AV77EXUHM5755c3b5";
+			//Multiple mobiles numbers separated by comma
+			String mobiles = "7791897645";
+			//Sender ID,While using route4 sender id should be 6 characters long.
+			String senderId = "102234";
+			//Your message to send, Add URL encoding here.
+			String message = "Test message";
+			//define route
+			String route="default";
+
+			//Prepare Url
+			URLConnection myURLConnection=null;
+			URL myURL=null;
+			BufferedReader reader=null;
+
+			//encoding message 
+			String encoded_message=URLEncoder.encode(message);
+
+			//Send SMS API
+			String mainUrl="https://control.msg91.com/api/sendhttp.php?";
+
+			//Prepare parameter string 
+			StringBuilder sbPostData= new StringBuilder(mainUrl);
+			sbPostData.append("authkey="+authkey); 
+			sbPostData.append("&mobiles="+mobiles);
+			sbPostData.append("&message="+encoded_message);
+			sbPostData.append("&route="+route);
+			sbPostData.append("&sender="+senderId);
+
+			//final string
+			mainUrl = sbPostData.toString();
+			try
+			{
+			    //prepare connection
+			    myURL = new URL(mainUrl);
+			    myURLConnection = myURL.openConnection();
+			    myURLConnection.connect();
+			    reader= new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
+			    //reading response 
+			    String respons;
+			    while ((respons = reader.readLine()) != null) 
+			    //print response 
+			    System.out.println(respons);
+			    
+			    //finally close connection
+			    reader.close();
+			} 
+			catch (IOException e) 
+			{ 
+				e.printStackTrace();
+			} 
+			
+			
 			System.out.println(PasswordEncoder.md5Encrypt(pass));
 			String url=((HttpServletRequest)request).getRequestURI().toString();
 			System.out.println(url);
