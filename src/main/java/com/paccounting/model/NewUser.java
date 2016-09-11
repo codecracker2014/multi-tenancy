@@ -5,6 +5,14 @@ public class NewUser {
 	private String mob;
 	private String name;
 	private String pass;
+	int otp;
+	
+	public int getOtp() {
+		return otp;
+	}
+	public void setOtp(int otp) {
+		this.otp = otp;
+	}
 	public String getMob() {
 		return mob;
 	}

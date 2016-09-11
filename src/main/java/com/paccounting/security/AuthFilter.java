@@ -29,8 +29,8 @@ public class AuthFilter extends GenericFilterBean{
 			throws IOException, ServletException {
 			System.out.println("Request in filter");
 			String pass="123456";
-			
-			String authkey = "115131AV77EXUHM5755c3b5";
+			    
+/*			String authkey = "115131AV77EXUHM5755c3b5";
 			//Multiple mobiles numbers separated by comma
 			String mobiles = "7791897645";
 			//Sender ID,While using route4 sender id should be 6 characters long.
@@ -58,7 +58,7 @@ public class AuthFilter extends GenericFilterBean{
 			sbPostData.append("&message="+encoded_message);
 			sbPostData.append("&route="+route);
 			sbPostData.append("&sender="+senderId);
-
+			    
 			//final string
 			mainUrl = sbPostData.toString();
 			try
@@ -82,12 +82,13 @@ public class AuthFilter extends GenericFilterBean{
 				e.printStackTrace();
 			} 
 			
-			
+*/			
 			System.out.println(PasswordEncoder.md5Encrypt(pass));
 			String url=((HttpServletRequest)request).getRequestURI().toString();
-			System.out.println(url);
+			
 			MultiReadHttpServletRequest httpServletRequest=new MultiReadHttpServletRequest((HttpServletRequest)request);
-			if("/paccounting/register".equals(url))
+			System.out.println("*"+url+"*");
+			if("/paccounting/register".equals(url)||"/paccounting/register/".equals(url)||"/paccounting/verify".equals(url)||"/paccounting/verify/".equals(url))
 			{
 				System.out.println("request for add new user");
 				chain.doFilter(request, response);

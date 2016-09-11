@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.paccounting.entities.Notification;
 import com.paccounting.entities.NotificationReceiverMapper;
 import com.paccounting.entities.Receiver;
+import com.paccounting.entities.TempUser;
 @Repository
 public class EntityDaoImpl implements EntityDao {
 	@PersistenceContext
@@ -109,5 +110,21 @@ public class EntityDaoImpl implements EntityDao {
 		return true;
 	}
 
+
+
+	public TempUser findTempUser(String mob) {
+		Query query =entityManager.createQuery("from TempUser t where t.mob=:mob");
+		query.setParameter("mob", mob);
+		TempUser tempUser2;
+		try{
+			tempUser2=(TempUser)query.getSingleResult();
+			return tempUser2;
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
 	
 }

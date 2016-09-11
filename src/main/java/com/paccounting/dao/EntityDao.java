@@ -5,6 +5,7 @@ import java.util.List;
 import com.paccounting.entities.Notification;
 import com.paccounting.entities.NotificationReceiverMapper;
 import com.paccounting.entities.Receiver;
+import com.paccounting.entities.TempUser;
 
 public interface EntityDao {
 
@@ -16,4 +17,5 @@ public interface EntityDao {
 	public List<Notification>getAllNotifications(Receiver receiver);
 	public List<NotificationReceiverMapper> getMapperByReceiver(Receiver receiver);
 	public NotificationReceiverMapper getMapperByNotificationReceiver(Notification notification,Receiver receiver);
+	public TempUser findTempUser(String mob);
 }
