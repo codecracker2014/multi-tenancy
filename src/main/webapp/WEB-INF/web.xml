@@ -30,7 +30,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>authFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/auth/*</url-pattern>
 	</filter-mapping>
 	<listener>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
